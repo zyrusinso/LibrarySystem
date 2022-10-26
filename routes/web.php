@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
+
 // @include_once('admin_web.php');
 
 // Route::get('/', function () {
