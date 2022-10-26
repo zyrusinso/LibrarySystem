@@ -1,0 +1,35 @@
+@media only screen and (max-width: 768px){
+    .logo-mobile{
+        width: 90px !important;
+        height: auto !important;
+    }
+    .loginBtnMobile{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.profile-greeting{
+    background-image: url(../assets/img/bg.jpg);
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;   
+}
+
+.profile-greeting-width{
+    max-width: 100%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 100%;
+}
+
+.page-wrapper.modern-sidebar.compact-wrapper .page-body-wrapper header.main-nav .main-navbar .nav-menu{
+    height: calc(100vh - 509px) !important;
+}
+
+@media (max-width: 1199px) {
+    .page-wrapper.modern-sidebar.compact-wrapper .page-body-wrapper header.main-nav .main-navbar .nav-menu{
+        height: calc(100vh - 402px) !important;
+    }
+}
