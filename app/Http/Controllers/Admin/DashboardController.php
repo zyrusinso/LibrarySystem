@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\Borrow;
+use App\Models\Monitor;
+use App\Models\VisitorLogs;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -15,7 +19,12 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('app.admin.dashboard');
+        $visitors = VisitorLogs::all();
+        $books = Book::all();
+        $borrow = Borrow::all();
+        $monitor = Monitor::all();
+        
+        return view('app.admin.dashboard', ['visitors' => $visitors, 'books' => $books, 'borrow' => $borrow, 'monitor' => $monitor]);
     }
 
     /**

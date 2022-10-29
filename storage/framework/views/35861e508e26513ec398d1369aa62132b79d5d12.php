@@ -45,7 +45,7 @@
                         <div class="align-self-center text-center"><i data-feather="user-check"></i></div>
                         <div class="media-body">
                             <span class="m-0">Visitors</span>
-                            <h4 class="mb-0 counter">6659</h4>
+                            <h4 class="mb-0 counter"><?php echo e(count($visitors)); ?></h4>
                             <i class="icon-bg" data-feather="user-check"></i>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         <div class="align-self-center text-center"><i data-feather="book"></i></div>
                         <div class="media-body">
                             <span class="m-0">Books</span>
-                            <h4 class="mb-0 counter">9856</h4>
+                            <h4 class="mb-0 counter"><?php echo e(count($books)); ?></h4>
                             <i class="icon-bg" data-feather="book"></i>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <div class="align-self-center text-center"><i data-feather="message-circle"></i></div>
                         <div class="media-body">
                             <span class="m-0">Request</span>
-                            <h4 class="mb-0 counter">893</h4>
+                            <h4 class="mb-0 counter"><?php echo e(count($borrow)); ?></h4>
                             <i class="icon-bg" data-feather="message-circle"></i>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <div class="align-self-center text-center"><i data-feather="share"></i></div>
                         <div class="media-body">
                             <span class="m-0">Borrowed</span>
-                            <h4 class="mb-0 counter">4531</h4>
+                            <h4 class="mb-0 counter"><?php echo e(count($monitor)); ?></h4>
                             <i class="icon-bg" data-feather="share"></i>
                         </div>
                     </div>
