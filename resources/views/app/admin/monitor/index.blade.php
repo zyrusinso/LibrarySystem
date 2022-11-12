@@ -35,16 +35,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>12-3456</td>
-                                    <td>Juan Dela Cruz</td>
-                                    <td>ang alamat ng Ibong adarna at tatlong prinsipe</td>
-                                    <td>Lended</td>
-                                    <td width="30%">
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                        <a href="#" class="btn btn-info">View</a>
-                                    </td>
-                                </tr>
+                                <?php 
+                                    function borrowerData($borrowerId){
+                                        return App\Models\Borrow::borrowerData($borrowerId);
+                                    }
+                                ?>
+                                @foreach ($monitors as $item)
+                                    <tr>
+                                        <td>{{ borrowerData($item->borrower_id)->stud_id }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td width="15%">
+                                            <a href="{{ route('monitor.show', $item->id) }}" class="btn btn-info">View</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Borrow;
 use App\Models\Monitor;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MonitorController extends Controller
 {
@@ -15,7 +16,8 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        return view('app.admin.monitor.index');
+        $monitors = Monitor::all();
+        return view('app.admin.monitor.index', compact('monitors'));
     }
 
     /**
@@ -45,9 +47,10 @@ class MonitorController extends Controller
      * @param  \App\Models\Monitor  $monitor
      * @return \Illuminate\Http\Response
      */
-    public function show(Monitor $monitor)
+    public function show($monitorId)
     {
-        //
+        $monitor = Monitor::where('id', $monitorId)->first();
+        return view('app.admin.monitor.show', compact('monitor'));
     }
 
     /**
@@ -82,5 +85,12 @@ class MonitorController extends Controller
     public function destroy(Monitor $monitor)
     {
         //
+    }
+
+    public function markUpdate($id){
+        $monitor = Monitor::where('id', $id)->first();
+        $monitor->update(['status' => 'Returned']);
+
+        return redirect()->back();
     }
 }

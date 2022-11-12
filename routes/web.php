@@ -27,14 +27,15 @@ Route::get('/borrow/{borrowId}', [App\Http\Controllers\Admin\BorrowController::c
 
 Route::prefix('admin')->group(function () {
     // Route::view('/logs', 'app.admin.visitor.index')->name('admin.logs');
-    Route::resource('/logs', App\Http\Controllers\Admin\VisitorLogsController::class);
+    Route::resource('/visitor-logs', App\Http\Controllers\Admin\VisitorLogsController::class);
     Route::resource('/borrow', App\Http\Controllers\Admin\BorrowController::class);
 
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
         // Route::view('/books', 'app.admin.visitor.index')->name('admin.monitor');
-        Route::get('/monitor', [App\Http\Controllers\Admin\MonitorController::class, 'index'])->name('admin.monitor');
+        Route::resource('/monitor', App\Http\Controllers\Admin\MonitorController::class);
         Route::resource('/books', App\Http\Controllers\Admin\BooksController::class);
+        Route::post('monitor/{id}/mark-update', [App\Http\Controllers\Admin\MonitorController::class, 'markUpdate'])->name('monitor.mark-update');
     });
 });
 

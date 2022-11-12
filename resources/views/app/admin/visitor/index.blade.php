@@ -29,22 +29,23 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Full Name</th>
-                                    <th>Book Title</th>
-                                    <th>Status</th> {{-- Lended or Returned--}}
+                                    <th>Course</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>12-3456</td>
-                                    <td>Juan Dela Cruz</td>
-                                    <td>ang alamat ng Ibong adarna at tatlong prinsipe</td>
-                                    <td>Lended</td>
-                                    <td width="30%">
-                                        <a href="#" class="btn btn-secondary">Edit</a>
-                                        <a href="#" class="btn btn-info">View</a>
-                                    </td>
-                                </tr>
+                                @foreach ($visitors as $item)
+                                    <tr>
+                                        <td>{{ $item->stud_id }}</td>
+                                        <td>{{ $item->fname }} {{ $item->lname }}</td>
+                                        <td>{{ $item->course }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->created_at)->format('M j Y') }}</td>
+                                        <td width="15%">
+                                            <a href="{{ route('visitor-logs.show', $item->id) }}" class="btn btn-secondary">View</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

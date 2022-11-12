@@ -32,14 +32,6 @@ class VisitorRequest extends FormRequest
             'postal' => ['required', 'numeric'],
             'stud_id' => ['required'],
             'course' => ['required'],
-            'terms' => ['required'],
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'terms.required' => 'Please check the box to agree to terms',
         ];
     }
 }

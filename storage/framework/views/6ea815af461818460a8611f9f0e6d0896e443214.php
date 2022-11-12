@@ -46,7 +46,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-8 col-sm-12 offset-lg-2">
-                    <form method="POST" action="<?php echo e(route('logs.store')); ?>" id="visitorsForm">
+                    <form method="POST" action="<?php echo e(route('visitor-logs.store')); ?>" id="visitorsForm">
                         <?php echo csrf_field(); ?>
 
                         <div class="row">

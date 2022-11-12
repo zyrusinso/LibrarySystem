@@ -38,10 +38,10 @@
                             <a class="nav-link menu-title link-nav {{routeActive('books.index')}}" href="{{ route('books.index') }}"><i data-feather="book"></i><span>Books</span></a>
                         </li>
                         <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{routeActive('logs.index')}}" href="{{ route('logs.index') }}"><i data-feather="edit"></i><span>Visitor Logs</span></a>
+                            <a class="nav-link menu-title link-nav {{routeActive('visitor-logs.index')}}" href="{{ route('visitor-logs.index') }}"><i data-feather="edit"></i><span>Visitor Logs</span></a>
                         </li>
                         <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{routeActive('admin.monitor')}}" href="{{ route('admin.monitor') }}"><i data-feather="airplay"></i><span>Material Monitoring</span></a>
+                            <a class="nav-link menu-title link-nav {{routeActive('monitor.index')}}" href="{{ route('monitor.index') }}"><i data-feather="airplay"></i><span>Material Monitoring</span></a>
                         </li>
 
                         <li class="sidebar-main-title">

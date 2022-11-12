@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Book;
 use App\Models\VisitorLogs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,8 @@ class VisitorLogsController extends Controller
      */
     public function index()
     {
-        //
+        $visitors = VisitorLogs::all();
+        return view('app.admin.visitor.index', compact('visitors'));
     }
 
     /**
@@ -39,6 +41,9 @@ class VisitorLogsController extends Controller
     {
         VisitorLogs::create($request->except('terms'));
 
+        if(auth()->user()){
+            return redirect(route('visitor-logs.index'));
+        }
         return redirect(route('visitor'));
     }
 
@@ -48,9 +53,11 @@ class VisitorLogsController extends Controller
      * @param  \App\Models\VisitorLogs  $visitorLogs
      * @return \Illuminate\Http\Response
      */
-    public function show(VisitorLogs $visitorLogs)
+    public function show($visitorLogs)
     {
-        //
+        $visitor = VisitorLogs::where('id', $visitorLogs)->first();
+        $books = Book::all();
+        return view('app.admin.visitor.show', compact('visitor', 'books'));
     }
 
     /**
@@ -71,9 +78,11 @@ class VisitorLogsController extends Controller
      * @param  \App\Models\VisitorLogs  $visitorLogs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VisitorLogs $visitorLogs)
+    public function update(VisitorRequest $request, $visitorLogs)
     {
-        //
+        VisitorLogs::where('id', $visitorLogs)->update($request->validated());
+
+        return redirect(route('visitor-logs.index'));
     }
 
     /**

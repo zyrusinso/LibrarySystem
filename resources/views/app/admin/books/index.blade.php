@@ -78,7 +78,7 @@
 <script>
     $('#myTable').DataTable({
         "paging":   true,
-        "ordering": false,
+        "ordering": true,
         "info":     true
     });
 </script>

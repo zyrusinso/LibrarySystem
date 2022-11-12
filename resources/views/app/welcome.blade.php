@@ -42,7 +42,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-8 col-sm-12 offset-lg-2">
-                    <form method="POST" action="{{ route('logs.store') }}" id="visitorsForm">
+                    <form method="POST" action="{{ route('visitor-logs.store') }}" id="visitorsForm">
                         @csrf
 
                         <div class="row">

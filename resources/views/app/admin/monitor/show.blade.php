@@ -1,6 +1,6 @@
 @extends('app.layouts.master')
 
-@section('title')Admin - Books | Library
+@section('title')Admin - Visitor Logs | Library
 @endsection
 
 @push('css')
@@ -9,10 +9,10 @@
 @section('content')
 @component('app.components.admin_breadcrumb')
 @slot('breadcrumb_title')
-<h3>Edit Book</h3>
+<h3>View Material</h3>
 @endslot
-<li class="breadcrumb-item">Books</li>
-<li class="breadcrumb-item active">Edit</li>
+<li class="breadcrumb-item">Material Monitoring</li>
+<li class="breadcrumb-item active">View</li>
 @endcomponent
 
 <div class="container-fluid">
@@ -22,52 +22,37 @@
                 <div class="card-header text-center">
                     <div class="row">
                         <div class="d-flex justify-content-between col-xl-7 col-md-7 col-8">
-                            <a href="{{ route('books.index') }}"><i data-feather="arrow-left-circle"></i></a>
-                            <h5>Book Details</h5>
+                            <a href="{{ route('monitor.index') }}"><i data-feather="arrow-left-circle"></i></a>
+                            <h5>Material Details</h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-8 col-sm-12 offset-lg-2">
-                            <form method="POST" action="{{ route('books.update', $book->id) }}" id="createForm" onsubmit="submittedForm()">
+                            <form method="POST" action="{{ route('monitor.update', $monitor->id) }}" id="updateForm">
                                 @csrf
                                 @method('PATCH')
 
-                                <div class="row">
-                                    <div class="mb-3 col-sm-12">
-                                        <label for="bookTitle">Title</label>
-                                        <input class="form-control" id="bookTitle" type="text" name="title" value="{{ old('title') ?? $book->title }}">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="mb-3 col-sm-6">
+                                        <label for="inputEmail4">First Name</label>
+                                        <input class="form-control" id="inputEmail4" type="text" name="name" value="{{ old('name') ?? $monitor->name }}">
+                                        @error('fname')
+                                            <div class="invalid-feedback" style="display: block !important">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-sm-6">
+                                        <label for="inputEmail5">Title</label>
+                                        <input class="form-control" id="inputEmail5" type="text" name="title" value="{{ old('title') ?? $monitor->title }}">
                                         @error('title')
                                             <div class="invalid-feedback" style="display: block !important">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
                                     <div class="mb-3 col-sm-6">
-                                        <label for="authorName">Author</label>
-                                        <input class="form-control" id="authorName" type="text" name="author" value="{{ old('author') ?? $book->author}}">
-                                        @error('author')
-                                            <div class="invalid-feedback" style="display: block !important">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3 col-sm-6">
-                                        <label for="year">Year</label>
-                                        <input class="form-control" id="year" type="number" min="1600" max="2099" value="{{ old('year') ?? $book->year }}" name="year">
-                                        @error('year')
-                                            <div class="invalid-feedback" style="display: block !important">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3 col-sm-6">
-                                        <label for="availStock">Available Stock</label>
-                                        <input class="form-control" id="availStock" type="number" min="0" name="avail_stock" value="{{ old('avail_stock') ?? $book->avail_stock }}">
-                                        @error('avail_stock')
-                                            <div class="invalid-feedback" style="display: block !important">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3 col-sm-6">
-                                        <label for="inputAddress5">Total Stock</label>
-                                        <input class="form-control" id="inputAddress5" type="number" min="0" name="total_stock" value="{{ old('total_stock') ?? $book->total_stock }}">
-                                        @error('total_stock')
+                                        <label for="inputPassword7">Status</label>
+                                        <input class="form-control" id="inputPassword7" type="text" name="status" value="{{ old('status') ?? ($monitor->status == 'Lended')? $monitor->status : 'Returned: '.\Carbon\Carbon::parse($monitor->updated_at)->format('M j Y') }}" readonly>
+                                        @error('status')
                                             <div class="invalid-feedback" style="display: block !important">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -75,8 +60,15 @@
                             </form>
                             <hr>
                             <div class="d-flex justify-content-center">
-                                <a class="btn btn-primary mx-2" href="javascript:void(0)" onclick="createData('create')">Submit</a>
+                                <a class="btn btn-primary mx-2" href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('updateForm').submit();">Update</a>
+                                @if ($monitor->status == 'Lended')
+                                <a href="javascript:void(0)" class="btn btn-info" onclick="event.preventDefault(); document.getElementById('markupdateForm').submit();">Mark as Returned</a>
+                                @endif
                             </div>
+
+                            <form id="markupdateForm" action="{{ route('monitor.mark-update', $monitor->id) }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>

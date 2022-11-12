@@ -10,4 +10,5 @@ class VisitorLogs extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $table = 'visitor_logs';
 }

@@ -32,10 +32,10 @@
                             <a class="nav-link menu-title link-nav <?php echo e(routeActive('books.index')); ?>" href="<?php echo e(route('books.index')); ?>"><i data-feather="book"></i><span>Books</span></a>
                         </li>
                         <li class="dropdown">
-                            <a class="nav-link menu-title link-nav <?php echo e(routeActive('logs.index')); ?>" href="<?php echo e(route('logs.index')); ?>"><i data-feather="edit"></i><span>Visitor Logs</span></a>
+                            <a class="nav-link menu-title link-nav <?php echo e(routeActive('visitor-logs.index')); ?>" href="<?php echo e(route('visitor-logs.index')); ?>"><i data-feather="edit"></i><span>Visitor Logs</span></a>
                         </li>
                         <li class="dropdown">
-                            <a class="nav-link menu-title link-nav <?php echo e(routeActive('admin.monitor')); ?>" href="<?php echo e(route('admin.monitor')); ?>"><i data-feather="airplay"></i><span>Material Monitoring</span></a>
+                            <a class="nav-link menu-title link-nav <?php echo e(routeActive('monitor.index')); ?>" href="<?php echo e(route('monitor.index')); ?>"><i data-feather="airplay"></i><span>Material Monitoring</span></a>
                         </li>
 
                         <li class="sidebar-main-title">
