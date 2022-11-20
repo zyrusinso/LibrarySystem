@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Throwable;
 use App\Models\Book;
 use App\Models\Borrow;
+use App\Models\Monitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BorrowRequest;
 
@@ -38,8 +42,29 @@ class BorrowController extends Controller
      */
     public function store(BorrowRequest $request)
     {
-        info($request->all());
-        $borrow = Borrow::create($request->except('terms'));
+        try{
+            
+            DB::beginTransaction();
+            $borrow = Borrow::create($request->except('terms'));
+            $monitorData = [
+                'borrower_id' => $borrow->id,
+                'name' => $borrow->fname.' '.$borrow->lname,
+                'title' => $borrow->book->title,
+                'status' => 'Lended'
+            ];
+
+            Monitor::create($monitorData);
+
+        }catch(Throwable $err){
+            DB::rollback();
+            Log::critical($err);
+            return response()->json([
+                'success' => false,
+                'message' => 'System failed! please contact the developer to fix the problem'
+            ]);
+        }
+
+        DB::commit();
 
         return redirect(route('borrow.success', ['borrowId' => $borrow->id]));
     }

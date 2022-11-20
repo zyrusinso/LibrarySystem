@@ -14,4 +14,14 @@ class Borrow extends Model
     public static function borrowerData($borrowerId){
         return static::where('id', $borrowerId)->first();
     }
+
+    /**
+    * Get the user that owns the Borrow
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function book()
+    {
+        return $this->hasOne(Book::class, 'id', 'book_id');
+    }
 }
